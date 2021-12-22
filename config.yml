@@ -1,0 +1,76 @@
+#Please make a ticket on discord for any questions. I appreciate all the feedback
+#to make this bot even better.
+
+#Please put in any prefix
+prefix: ;
+
+#Tokens 
+token: 
+tenor: 
+
+#Activity List
+#This is the bots activity status, it will rotate between the 4.
+list: 
+  - 
+  - 
+  - 
+  - 
+
+#This will be the set color for the bot. It uses hexcode please replace the # with 0x. For example black's hexcode is #000000 therefore
+#it will be 0x000000.
+color: 
+
+
+#For channels just put the names. Cases do matter welcome does not equal Welcome
+
+#toggleWelcome is a boolean variable therefore only true and false are permitted.
+toggleWelcome: true
+welcomeChannel: 
+announcementChannel: 
+rulesChannel: 
+
+#Other Important Channels
+#TicketChannel affects the welcome function
+ticketChannel: 
+ticketlogChannel: 
+logChannel: 
+giveawayChannel:
+pollChannel: 
+verifyChannel: 
+
+#categories for ticketsupport
+undecided: 
+general: 
+admin: 
+payment: 
+
+
+#Roles Case Sensitive
+verifyRole: 
+ticketsupport: 
+modRole: 
+adminRole: 
+
+#works with all type of emojis now!!!! 
+
+
+verifyEmoji: 
+ticketEmoji: 
+closeEmoji: 
+paymentEmoji: 
+adminEmoji: 
+generalEmoji: 
+
+#For the ticket emojis if it isnt custom just copy the one from the above section to the corresponding
+#section below. If it is a custom emoji do \(custom emoji) in a discord chat and copy it into the 
+#below section. Example: <a:diamondshine:875153759863472228> If you need help make ticket in my discord
+
+paymentCustomEmoji: 
+adminCustomEmoji: 
+generalCustomEmoji: 
+
+#Custom Emoji for Discinfo command
+customDisc: 
+#Id for customDisc Emoji
+customDiscEmoji: 
+
