@@ -347,27 +347,88 @@ if(emoji.name ===config.closeEmoji && message.channel.name.includes('ticket-') |
 
 const status = (queue) => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 
-//Someone showed me how to do the distube events
+
 distube
-    .on("playSong", (message, queue, song) => message.channel.send(
-        `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}\n${status(queue)}`
-    ))
-    .on("addSong", (message, queue, song) => message.channel.send(
-        `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
-    ))
-    .on("playList", (message, queue, playlist, song) => message.channel.send(
-        `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`
-    ))
-    .on("addList", (message, queue, playlist) => message.channel.send(
-        `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`
-    ))
+    .on("playSong", (message, queue, song) => { 
+        const {guild} = message;
+        const {name} = guild;
+        const icon = guild.iconURL({dynamic: true});
+        const playEmbed = new Discord.MessageEmbed()
+        .setTitle(options.underlineWrap(`${name} Music`))
+        .setDescription(`**Playing** \`${song.name}\` - \`${song.formattedDuration}\`\n**Requested by:** ${song.user}\n${status(queue)}`)
+        .setFooter("Music", icon)
+        .setTimestamp()
+        .setColor(color)
+        message.channel.send(playEmbed)
+       
+    })
+    .on("addSong", (message, queue, song) =>{ 
+        const {guild} = message
+        const {name} = guild
+        const icon = guild.iconURL({dynamic: true})
+        const addSong = new Discord.MessageEmbed()
+        .setTitle(options.underlineWrap(`${name} Music`))
+        .setDescription(`Added ${song.name} - \`${song.formattedDuration}\` \nto the queue by ${song.user}`)
+        .setFooter("Music", icon)
+        .setTimestamp()
+        .setColor(color)      
+        message.channel.send(addSong)})
+
+    .on("playList", (message, queue, playlist, song) => {
+        const {guild} = message
+        const {name} = guild
+        const icon = guild.iconURL({dynamic: true})
+        const playlistEmbed = new Discord.MessageEmbed()
+        .setTitle(options.underlineWrap(`${name} Music`))
+        .setDescription(`Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`)
+        .setFooter("Music", icon)
+        .setTimestamp()
+        .setColor(color)   
+        
+        message.channel.send(playlistEmbed)
+        
+    })
+    .on("addList", (message, queue, playlist) => {
+        const {guild} = message
+        const {name} = guild
+        const icon = guild.iconURL({dynamic: true})
+        const playlistEmbed2 = new Discord.MessageEmbed()
+        .setTitle(options.underlineWrap(`${name} Music`))
+        .setDescription(`Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`)
+        .setFooter("Music", icon)
+        .setTimestamp()
+        .setColor(color)
+        
+        message.channel.send(playlistEmbed2)
+    })
     
     .on("searchResult", (message, result) => {
+        const {guild} = message
+        const {name} = guild
+        const icon = guild.iconURL({dynamic: true})
         let i = 0;
-        message.channel.send(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`);
+        const searchEmbed = new Discord.MessageEmbed()
+        .setTitle(options.underlineWrap(`${name} Music`))
+        .setDescription(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`)
+        .setFooter("Music", icon)
+        .setTimestamp()
+        .setColor(color)
+        
+        message.channel.send(searchEmbed);
     })
    
-    .on("searchCancel", (message) => message.channel.send(`Searching canceled`))
+    .on("searchCancel", (message) => {
+        const {guild} = message
+        const {name} = guild
+        const icon = guild.iconURL({dynamic: true})
+        const cancelEmbed = new Discord.MessageEmbed()
+        .setTitle(options.underlineWrap(`${name} Music`))
+        .setDescription(`Searching canceled`)
+        .setFooter("Music", icon)
+        .setTimestamp()
+        .setColor(color)
+        message.channel.send(cancelEmbed)
+    })
     .on("error", (message, e) => {
         console.error(e)
         message.channel.send("An error encountered: " + e);
