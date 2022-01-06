@@ -10,9 +10,7 @@ module.exports = {
             return
         }
         const queueEmbed = new MessageEmbed()
-        .setDescription('Current queue:\n' + queue.songs.map((song, id) =>
-        `**${id + 1}**. ${song.name} - \`${song.formattedDuration}\``
-    ).slice(0, 10).join("\n"))
+        .setDescription('Current queue:\n' + queue.songs.map((song, id) =>`**${id + 1}**. ${song.name} - \`${song.formattedDuration}\``).slice(0, 10).join("\n"))
         .setColor(color)
         .setFooter("Music", icon)
         .setTimestamp()
