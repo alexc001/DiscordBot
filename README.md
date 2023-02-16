@@ -27,7 +27,7 @@
     "node-fetch": "^2.6.1"
 
 # LINKS
-### Discord: https://discord.gg/yeRSP8NEqV
+### Discord:  https://discord.gg/rBHaqUXh4g
 ### Youtube Video: https://youtu.be/WuRMafCnKVU
 
 
